@@ -1,2 +1,2 @@
-# -SCE302-DomainAnalysis-Design
+# SCE302_DomainAnalysisDesign
 김씨네 이모
