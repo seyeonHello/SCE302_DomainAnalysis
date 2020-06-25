@@ -7,8 +7,11 @@ public class Order
    ArrayList<OrderLineItem> lineItems = new ArrayList<OrderLineItem>();
    private Date date = new Date();
    private boolean isComplete = false;
+   private ProductCatalog catalog;
    private Payment payment;
-
+   public Order(ProductCatalog catalog) {
+		this.catalog = catalog;
+	}
    public float getBalance()
    {
 	  float originAmount=payment.getAmount();
@@ -19,10 +22,13 @@ public class Order
 
    public boolean isComplete() { return isComplete; }
 
-   public void makeLineItem( ProductDescription desc, int quantity )
-   {
-      lineItems.add( new OrderLineItem( desc, quantity ) );
-      System.out.println(this.getTotal());
+   public void makeLineItem(int id, int quantity, int option) { //바로  주문하기
+		ProductDescription desc = catalog.getProductDescription(id);
+		lineItems.add(new OrderLineItem(desc, quantity, option));
+		System.out.println(this.getTotal());
+	}
+   public void setLineItem(ArrayList<OrderLineItem> cartLineItems) { //장바구니에서 가져오기
+	   lineItems=cartLineItems;	   
    }
 
    public float getTotal()

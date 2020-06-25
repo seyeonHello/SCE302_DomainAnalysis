@@ -4,21 +4,30 @@ import java.util.Map;
 public class ProductCatalog{   
 	private Map<Integer, ProductDescription> descriptions = new HashMap<Integer, ProductDescription>();
 	private Map<Integer, String> categoryList = new HashMap<Integer, String>();
-
+	private Map<Integer, String> optionList = new HashMap<Integer, String>();
 	public ProductCatalog()   
 	{      // sample data
       categoryList.put(1,"상의");
       categoryList.put(2,"하의");
       categoryList.put(3,"원피스");
       categoryList.put(4,"악세사리");
+      optionList.put(1, "S");
+      optionList.put(2, "M");
+      optionList.put(3, "L");
 	  int id1=100;
       int id2=200;
+      int id3=300;
+      int id4=400;
       float price=30000;
       ProductDescription desc;
-      desc = new ProductDescription( id1, price, "원피스","원피스");
+      desc = new ProductDescription( id1, price, "티셔츠","상의");
       descriptions.put( id1, desc );
-      desc = new ProductDescription( id2, price, "모자","악세사리");
-      descriptions.put( id2, desc );   
+      desc = new ProductDescription( id2, price, "반바지","하의");
+      descriptions.put( id2, desc );
+      desc = new ProductDescription( id3, price, "원피스","원피스");
+      descriptions.put( id3, desc );
+      desc = new ProductDescription( id4, price, "모자","악세사리");
+      descriptions.put( id4, desc );   
      }
    public ProductDescription getProductDescription( int id )   
    {
@@ -39,6 +48,14 @@ public class ProductCatalog{
 	   for (Integer key : categoryList.keySet()) {
            String value = categoryList.get(key);
            System.out.println("[카테고리 "+key+"]:" + value);
+       }
+	   
+   }
+   public void showOptionList() {
+		
+	   for (Integer key : optionList.keySet()) {
+           String value = optionList.get(key);
+           System.out.println("[옵션 "+key+"]:" + value);
        }
 	   
    }
