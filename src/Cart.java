@@ -11,7 +11,7 @@ public class Cart {
 		this.catalog = catalog;
 	}
 
-	public void addItem(int id, int quantity, int option) {
+	public void addItem(int id, int quantity, String option) {
 		ProductDescription desc = catalog.getProductDescription(id);
 		lineItems.add(new OrderLineItem(desc, quantity, option));
 		
@@ -25,8 +25,9 @@ public class Cart {
 	public void showCartItem() { //장바구니 내역 보기
 		for (OrderLineItem lineItems : lineItems) {
 			System.out
-					.println(lineItems.getID() + " " + lineItems.getOption() + " " + lineItems.getQuantity());
+					.println("itemID: "+lineItems.getID() +", option: "+ lineItems.getOption() + ", quantity: " + lineItems.getQuantity());
 		}
+		System.out.println("total: "+this.getTotal());
 	}
 	public float getTotal() { //장바구니에 담긴 아이템들의 총 가격
 		float sum=0;

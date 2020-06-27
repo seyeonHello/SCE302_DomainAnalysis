@@ -4,16 +4,12 @@ import java.util.Map;
 public class ProductCatalog{   
 	private Map<Integer, ProductDescription> descriptions = new HashMap<Integer, ProductDescription>();
 	private Map<Integer, String> categoryList = new HashMap<Integer, String>();
-	private Map<Integer, String> optionList = new HashMap<Integer, String>();
 	public ProductCatalog()   
 	{      // sample data
       categoryList.put(1,"상의");
       categoryList.put(2,"하의");
       categoryList.put(3,"원피스");
       categoryList.put(4,"악세사리");
-      optionList.put(1, "S");
-      optionList.put(2, "M");
-      optionList.put(3, "L");
 	  int id1=100;
       int id2=200;
       int id3=300;
@@ -48,14 +44,6 @@ public class ProductCatalog{
 	   for (Integer key : categoryList.keySet()) {
            String value = categoryList.get(key);
            System.out.println("[카테고리 "+key+"]:" + value);
-       }
-	   
-   }
-   public void showOptionList() {
-		
-	   for (Integer key : optionList.keySet()) {
-           String value = optionList.get(key);
-           System.out.println("[옵션 "+key+"]:" + value);
        }
 	   
    }

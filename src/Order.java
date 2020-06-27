@@ -22,7 +22,7 @@ public class Order
 
    public boolean isComplete() { return isComplete; }
 
-   public void makeLineItem(int id, int quantity, int option) { //바로  주문하기
+   public void makeLineItem(int id, int quantity, String option) { //바로  주문하기
 		ProductDescription desc = catalog.getProductDescription(id);
 		lineItems.add(new OrderLineItem(desc, quantity, option));
 		System.out.println(this.getTotal());

@@ -3,19 +3,11 @@ public class OrderLineItem{
 	private int quantity;
 	private String option;
 	private ProductDescription description;
-	public OrderLineItem (ProductDescription desc, int quantity, int option )   
+	public OrderLineItem (ProductDescription desc, int quantity, String option )   
 	{
       this.description = desc;      
       this.quantity = quantity;
-      if(option==1) {
-    	  this.option="S";
-      }
-      if(option==2) {
-    	  this.option="M";
-      }
-      if(option==3) {
-    	  this.option="L";
-      }
+      this.option=option;
     }
 	public int getID()
 	{

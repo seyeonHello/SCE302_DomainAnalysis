@@ -25,9 +25,9 @@ public class Main {
 		System.out.printf("Please Select Item: ");
 		int itemID = input.nextInt();
 		System.out.print("____________< OPTION LIST >____________\n");
-		catalog.showOptionList();
+		System.out.println("s m l");
 		System.out.print("Please Select Option: ");
-		int optionID = input.nextInt();
+		String optionID=input.next();
 		System.out.printf("Please Select quantity: ");
 		int quantity = input.nextInt();
 		System.out.println("1. Cart, 2. Order ");
