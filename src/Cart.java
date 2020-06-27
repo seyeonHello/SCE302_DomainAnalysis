@@ -25,7 +25,7 @@ public class Cart {
 	public void showCartItem() { //장바구니 내역 보기
 		for (OrderLineItem lineItems : lineItems) {
 			System.out
-					.println("itemID: "+lineItems.getID() +", option: "+ lineItems.getOption() + ", quantity: " + lineItems.getQuantity());
+					.println("itemID: "+lineItems.getID() +", option: "+ lineItems.getOption() + ", quantity: " + lineItems.getQuantity()+", price: " +lineItems.getSubtotal());
 		}
 		System.out.println("total: "+this.getTotal());
 	}
