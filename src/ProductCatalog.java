@@ -1,50 +1,58 @@
 import java.util.HashMap;
 import java.util.Map;
 
-public class ProductCatalog{   
-	private Map<Integer, ProductDescription> descriptions = new HashMap<Integer, ProductDescription>();
-	private Map<Integer, String> categoryList = new HashMap<Integer, String>();
-	public ProductCatalog()   
-	{      // sample data
-      categoryList.put(1,"상의");
-      categoryList.put(2,"하의");
-      categoryList.put(3,"원피스");
-      categoryList.put(4,"악세사리");
-	  int id1=100;
-      int id2=200;
-      int id3=300;
-      int id4=400;
-      float price=30000;
-      ProductDescription desc;
-      desc = new ProductDescription( id1, price, "티셔츠","상의");
-      descriptions.put( id1, desc );
-      desc = new ProductDescription( id2, price, "반바지","하의");
-      descriptions.put( id2, desc );
-      desc = new ProductDescription( id3, price, "원피스","원피스");
-      descriptions.put( id3, desc );
-      desc = new ProductDescription( id4, price, "모자","악세사리");
-      descriptions.put( id4, desc );   
-     }
-   public ProductDescription getProductDescription( int id )   
-   {
-      return descriptions.get( id );   
-   }
-   public void showItemList(Integer num) {
+public class ProductCatalog {
+    private Map<Integer, Map<Integer, ProductDescription>> categoryList = new HashMap<Integer, Map<Integer, ProductDescription>>();
 
-	   for (Integer key : descriptions.keySet()) {
-           ProductDescription value = descriptions.get(key);
-           if(categoryList.get(num)==value.getCategoryName()) {
-        	   System.out.println("[itemID]:" + key + ", [가격]:" + value.getPrice()+" [설명]:"+value.getDescription());
-           }
-       }
-	   
-   }
-   public void showCategoryList() {
-		
-	   for (Integer key : categoryList.keySet()) {
-           String value = categoryList.get(key);
-           System.out.println("[카테고리 "+key+"]:" + value);
-       }
-	   
-   }
+    public ProductCatalog() { // setting up the sample data
+        this.setProductDescription();
+    }
+
+    public Map<Integer, Map<Integer, ProductDescription>> getCatalogList() {
+        return this.categoryList;
+    }
+
+    public Map<Integer, ProductDescription> selectCategory(Integer catalogID) {
+        Map<Integer, ProductDescription> itemList;
+        itemList = this.categoryList.get(catalogID);
+        return itemList;
+    }
+
+    public void setProductDescription() {
+        // few sample datas for Use Case 1
+        Map<Integer, ProductDescription> toplist = new HashMap<Integer, ProductDescription>();
+        Map<Integer, ProductDescription> bottomlist = new HashMap<Integer, ProductDescription>();
+        Map<Integer, ProductDescription> dresslist = new HashMap<Integer, ProductDescription>();
+        Map<Integer, ProductDescription> etclist = new HashMap<Integer, ProductDescription>();
+
+        int id1 = 100;
+        int id2 = 200;
+        int id3 = 300;
+        int id4 = 400;
+        float price = 30000;
+        ProductDescription desc;
+
+        String[] options = { "red", "blue", "yellow" };
+        String[] options2 = { "S", "M", "L" };
+
+        desc = new ProductDescription(id1, price, "for spring >_<!", "TOP", options);
+        toplist.put(id1, desc);
+        desc = new ProductDescription(id1 + 2, price, "for summer>_<!", "TOP", options);
+        toplist.put(id1 + 2, desc);
+        this.categoryList.put(1, toplist);
+
+        desc = new ProductDescription(id2, price, "blue", "BOTTOM", options2);
+        bottomlist.put(id2, desc);
+        this.categoryList.put(2, bottomlist);
+
+        desc = new ProductDescription(id3, price, "yellow", "DRESS", options);
+        dresslist.put(id3, desc);
+        this.categoryList.put(3, dresslist);
+
+        desc = new ProductDescription(id4, price, "white", "ETC", options2);
+        etclist.put(id4, desc);
+        this.categoryList.put(4, etclist);
+
+    }
+
 }

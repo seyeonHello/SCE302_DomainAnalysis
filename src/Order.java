@@ -1,53 +1,92 @@
 import java.awt.List;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Map;
 
-public class Order
-{
-   ArrayList<OrderLineItem> lineItems = new ArrayList<OrderLineItem>();
-   private Date date = new Date();
+import sun.java2d.pipe.SpanShapeRenderer.Simple;
+
+import java.text.SimpleDateFormat;
+
+public class Order {
+
+   Customer customer;
+   Map<Integer, OrderLineItem> lineItems;
+   private Date date;
+   private int orderID;
    private boolean isComplete = false;
-   private ProductCatalog catalog;
    private Payment payment;
-   public Order(ProductCatalog catalog) {
-		this.catalog = catalog;
-	}
-   public float getBalance()
-   {
-	  float originAmount=payment.getAmount();
-      return originAmount-getTotal();
+   private String address;
+
+   public Order(Map<Integer, OrderLineItem> lineItems, Customer cus, int orderID, String address) {
+      this.lineItems = lineItems;
+      this.customer = cus;
+      this.date = new Date(System.currentTimeMillis());
+      this.orderID = orderID;
+      this.address = address;
    }
 
-   public void becomeComplete() { isComplete = true; }
-
-   public boolean isComplete() { return isComplete; }
-
-   public void makeLineItem(int id, int quantity, String option) { //πŸ∑Œ  ¡÷πÆ«œ±‚
-		ProductDescription desc = catalog.getProductDescription(id);
-		lineItems.add(new OrderLineItem(desc, quantity, option));
-		System.out.println(this.getTotal());
-	}
-   public void setLineItem(ArrayList<OrderLineItem> cartLineItems) { //¿ÂπŸ±∏¥œø°º≠ ∞°¡Æø¿±‚
-	   lineItems=cartLineItems;	   
+   public float getBalance() {
+      float originAmount = payment.getAmount();
+      return originAmount - getTotal();
    }
 
-   public float getTotal()
-   {
-      float total=0;
+   public int getOrderID() {
+      return this.orderID;
+   }
+
+   public void becomeComplete() {
+      isComplete = true;
+      // Í≤∞Ï†úÎêòÎ©¥ line itemÎì§ÎèÑ Î™®Îëê Í≤∞Ï†úÏôÑÎ£åÎ°ú? Ìï¥Î¥ÖÏãúÎã§.
+   }
+
+   public boolean isComplete() {
+      return isComplete;
+   }
+
+   public String getAddress() {
+      return this.address;
+   }
+
+   public String getDate() {
+      SimpleDateFormat dateform = new SimpleDateFormat("yyyy-MM-dd-HH:mm:ss");
+      return dateform.format(this.date);
+   }
+
+   public Map<Integer, OrderLineItem> getLineItem() {
+      return this.lineItems;
+
+   }
+
+   // public void makeLineItem(int id, int quantity, String option) { //ÔøΩŸ∑ÔøΩ ÔøΩ÷πÔøΩÔøΩœ±ÔøΩ
+   // ProductDescription desc = catalog.getProductDescription(id);
+   // lineItems.add(new OrderLineItem(desc, quantity, option));
+   // enrollOrderHistory();
+   // }
+
+   // public void setLineItem(ArrayList<OrderLineItem> cartLineItems) {
+   // lineItems = cartLineItems;
+   // }
+
+   // public void enrollOrderHistory() {
+   // for (OrderLineItem lineItems : lineItems) {
+   // orderhistory.insertOrderHistory(new OrderLineHistory(lineItems.getID(),
+   // lineItems.getOption(),
+   // lineItems.getQuantity(), lineItems.getSubtotal()));
+   // }
+   // }
+
+   public float getTotal() {
+      float total = 0;
       float subtotal = 0;
 
-      for ( OrderLineItem lineItem : lineItems )
-      {
-         subtotal = lineItem.getSubtotal();
-         total+=subtotal;
-      }
-   return total;
+      // for (OrderLineItem lineItem : lineItems) {
+      // subtotal = lineItem.getSubtotal();
+      // total += subtotal;
+      // }
+      return total;
    }
 
-   public void makePayment( float cashTendered )
-   {
-      payment = new Payment( cashTendered );
+   public void makePayment(float cashTendered) {
+      payment = new Payment(cashTendered);
    }
 }
-
-

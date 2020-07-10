@@ -1,57 +1,50 @@
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
 
 public class Cart {
-	private ProductCatalog catalog;
-	private Order currentOrder;
-	private ProductDescription description;
-	ArrayList<OrderLineItem> lineItems = new ArrayList<OrderLineItem>();
 
-	public Cart(ProductCatalog catalog) {
-		super();
-		this.catalog = catalog;
+	Map<Integer, OrderLineItem> lineItems = new HashMap<Integer, OrderLineItem>();
+
+	public Cart() {
+		System.out.print("In the Cart Constructor\n");
+
 	}
 
-	public void addItem(int id, int quantity, String option) {
-		ProductDescription desc = catalog.getProductDescription(id);
-		lineItems.add(new OrderLineItem(desc, quantity, option));
-		
+	public Map<Integer, OrderLineItem> addItem(ProductDescription desc, int quantity, String option) {
+		lineItems.put(desc.getItemID(), new OrderLineItem(desc, quantity, option));
+		return lineItems;
 	}
 
-	public void makeNewOrder() { //주문을 시작한다.
-		currentOrder = new Order(catalog);
-		currentOrder.setLineItem(lineItems);
+	public Map<Integer, OrderLineItem> getLineItems() {
+		return this.lineItems;
 	}
 
-	public void showCartItem() { //장바구니 내역 보기
-		for (OrderLineItem lineItems : lineItems) {
-			System.out
-					.println("itemID: "+lineItems.getID() +", option: "+ lineItems.getOption() + ", quantity: " + lineItems.getQuantity()+", price: " +lineItems.getSubtotal());
-		}
-		System.out.println("total: "+this.getTotal());
-	}
-	public float getTotal() { //장바구니에 담긴 아이템들의 총 가격
-		float sum=0;
-		for (OrderLineItem lineItems : lineItems) {
-			sum+=lineItems.getSubtotal();
+	public float getTotal() {
+		OrderLineItem oli;
+		float sum = 0;
+		for (Integer key : lineItems.keySet()) {
+			oli = lineItems.get(key);
+			sum += oli.getSubtotal();
 		}
 		return sum;
 	}
-	public void setQuantity(int id, int quantity) { //장바구니에 담긴 아이템들의 총 가격
-		for (OrderLineItem lineItems : lineItems) {
-			if(lineItems.getID()==id) {
-				lineItems.setQuantity(quantity);
-			}
-		}
+
+	public void setQuantity(int id, int quantity) {
 	}
-	public void deleteItem (int id) { 
-		int index=-1;
-		int final2=0;
-		for (OrderLineItem lineItemss : lineItems) {
-			index++;
-			if(lineItemss.getID()==id) {
-				final2=index;
-			}
-		}
-		lineItems.remove(final2);
+
+	public void deleteItem(int id) {
+		int index = -1;
+		int final2 = 0;
+	}
+
+	public void setItems() {
+		String[] opt = { "white", "red", "blue" };
+		ProductDescription tempDesc = new ProductDescription(102, 20000, "feel the summer", "Dress", opt);
+		this.addItem(tempDesc, 2, "red");
+
+		String[] opt2 = { "white", "red", "blue" };
+		tempDesc = new ProductDescription(104, 24000, "giving you the best fit ever", "Bottom", opt2);
+		this.addItem(tempDesc, 1, "S");
 	}
 }
