@@ -11,13 +11,10 @@ public class ShoppingMall {
 	public ShoppingMall() {
 		this.catalog = new ProductCatalog();
 		this.history = new OrderHistory();
-		this.customer = new Customer("kimC", "eemo");
-		this.aiController = new AddItemController(this);
-		this.moController = new ManageOrderController(this);
-
+		this.customer = new Customer("kimC", "Eemo", "Suwon Ajou University");
+		this.aiController = new AddItemController(this.catalog, this.customer);
+		this.moController = new ManageOrderController(this.history);
 	}
-
-	// private Order order = new Order( catalog );
 
 	public ProductCatalog getCatalog() {
 		return catalog;
@@ -53,18 +50,6 @@ public class ShoppingMall {
 				break;
 			default:
 				break;
-
 		}
-
-		// use-case1
-
-		// use-case2
-
-		// use-case3
-
 	}
-	// controller의 역할을 하는 아이들을
-
-	// public Order getOrder() { return order;}
-
 }

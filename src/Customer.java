@@ -2,11 +2,13 @@ public class Customer {
     private String customerName;
     private String customerId;
     private Cart cart;
+    private String Address;
 
-    public Customer(String name, String id) {
+    public Customer(String name, String id, String Address) {
         System.out.print("new customer");
         this.customerName = name;
         this.customerId = id;
+        this.Address = Address;
         this.cart = new Cart();
     }
 
@@ -14,8 +16,16 @@ public class Customer {
         return this.customerName;
     }
 
+    public String getAddress() {
+        return this.Address;
+    }
+
     public String getID() {
         return this.customerId;
+    }
+
+    public Cart getCart() {
+        return this.cart;
     }
 
     public void setName(String name) {
@@ -26,7 +36,4 @@ public class Customer {
         this.customerId = id;
     }
 
-    public Cart getCart() {
-        return this.cart;
-    }
 }

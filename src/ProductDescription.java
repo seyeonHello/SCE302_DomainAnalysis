@@ -1,13 +1,13 @@
 
 public class ProductDescription {
-	private int id;
+	private int itemID;
 	private float price;
 	private String description;
 	private String categoryName;
 	private String[] option = new String[10];
 
 	public ProductDescription(int id, float price, String description, String category, String[] option) {
-		this.id = id;
+		this.itemID = id;
 		this.price = price;
 		this.description = description;
 		this.categoryName = category;
@@ -15,17 +15,16 @@ public class ProductDescription {
 	}
 
 	public String getOption() {
-		String returnOpt = new String();
+		String itemOption = new String();
 
 		for (String opt : this.option) {
-			returnOpt = returnOpt + opt + " ";
+			itemOption = itemOption + opt + " ";
 		}
-		return returnOpt;
-
+		return itemOption;
 	}
 
 	public int getItemID() {
-		return id;
+		return itemID;
 	}
 
 	public float getPrice() {

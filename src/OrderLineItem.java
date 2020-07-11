@@ -9,16 +9,12 @@ public class OrderLineItem {
 		this.itemDescription = desc;
 		this.quantity = quantity;
 		this.option = option;
+		// default value
 		this.status = "결제 완료";// 발송완료, 결제완료
 	}
 
 	public int getID() {
 		return itemDescription.getItemID();
-	}
-
-	public float getSubtotal() {
-		float eachItemPrice = itemDescription.getPrice();
-		return eachItemPrice * quantity;
 	}
 
 	public String getDescription() {
@@ -33,12 +29,17 @@ public class OrderLineItem {
 		return option;
 	}
 
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
-
 	public String getStatus() {
 		return this.status;
+	}
+
+	public float getSubtotal() {
+		float eachItemPrice = itemDescription.getPrice();
+		return eachItemPrice * quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
 
 	public void setStatus(String s) {

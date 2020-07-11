@@ -4,22 +4,18 @@ import java.util.HashMap;
 
 public class Cart {
 
-	Map<Integer, OrderLineItem> lineItems = new HashMap<Integer, OrderLineItem>();
+	private Map<Integer, OrderLineItem> lineItems = new HashMap<Integer, OrderLineItem>();
 
 	public Cart() {
-		System.out.print("In the Cart Constructor\n");
-
 	}
 
-	public Map<Integer, OrderLineItem> addItem(ProductDescription desc, int quantity, String option) {
-		lineItems.put(desc.getItemID(), new OrderLineItem(desc, quantity, option));
-		return lineItems;
+	// Adding Items to Cart
+	public void addItem(ProductDescription desc, int quantity, String option) {
+		OrderLineItem oli = new OrderLineItem(desc, quantity, option);
+		lineItems.put(desc.getItemID(), oli);
 	}
 
-	public Map<Integer, OrderLineItem> getLineItems() {
-		return this.lineItems;
-	}
-
+	// Get the total of Cart Items
 	public float getTotal() {
 		OrderLineItem oli;
 		float sum = 0;
@@ -30,14 +26,26 @@ public class Cart {
 		return sum;
 	}
 
-	public void setQuantity(int id, int quantity) {
-	}
-
+	// Deleting the Line Item in the Cart
 	public void deleteItem(int id) {
-		int index = -1;
-		int final2 = 0;
+		lineItems.remove(id);
 	}
 
+	public OrderLineItem setQuantity(int id, int quantity) {
+		OrderLineItem oli = lineItems.get(id);
+		oli.setQuantity(quantity);
+		return oli;
+	}
+
+	public Map<Integer, OrderLineItem> getLineItems() {
+		return this.lineItems;
+	}
+
+	public OrderLineItem getLineItem(int id) {
+		return lineItems.get(id);
+	}
+
+	// setting Cart Items for Use Case test3
 	public void setItems() {
 		String[] opt = { "white", "red", "blue" };
 		ProductDescription tempDesc = new ProductDescription(102, 20000, "feel the summer", "Dress", opt);

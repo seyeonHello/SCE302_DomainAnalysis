@@ -4,25 +4,21 @@ import java.util.Map;
 // import javax.swing.plaf.basic.BasicInternalFrameTitlePane.SystemMenuBar;
 
 public class AddItemController {
-    ShoppingMall shop;
-    Cart cart;
-    Customer customer;
-    ProductCatalog catalog;
-    Map<Integer, ProductDescription> selectedCatalog;
-    ProductDescription selectedItem;
 
-    public AddItemController(ShoppingMall shop) {
+    private Cart cart;
+    private Customer customer;
+    private ProductCatalog catalog;
+    private Map<Integer, ProductDescription> selectedCatalog;
+    private ProductDescription selectedItem;
 
-        this.shop = shop;
-        this.catalog = shop.getCatalog();
-        this.customer = shop.getCustomer();
-
-        this.cart = shop.getCustomer().getCart();
-        System.out.print("WHYYYYYYYYYYYYYYYYYYYYY\n");
+    public AddItemController(ProductCatalog catalog, Customer customer) {
+        this.catalog = catalog;
+        this.customer = customer;
+        this.cart = customer.getCart();
     }
 
     public Map<Integer, Map<Integer, ProductDescription>> startShopping() {
-        Map<Integer, Map<Integer, ProductDescription>> templist = catalog.getCatalogList();
+        Map<Integer, Map<Integer, ProductDescription>> templist = catalog.setCatalog();
         return templist;
     }
 
@@ -40,8 +36,15 @@ public class AddItemController {
         return selectedItem.getPrice() * quantity;
     }
 
-    public StringBuilder addItem(String option, int quantity) {
-        Map<Integer, OrderLineItem> lineItems = this.cart.addItem(selectedItem, quantity, option);
+    // Add Item to the Cart,and show the list with Total
+    public void addItem(int itemID, String option, int quantity) {
+        this.selectedItem = selectedCatalog.get(itemID);
+        this.cart.addItem(selectedItem, quantity, option);
+        System.out.println("\nSuccess adding Item to the Cart\n\n");
+    }
+
+    public void showMeTheCart() {
+        Map<Integer, OrderLineItem> lineItems = cart.getLineItems();
         StringBuilder returnString = new StringBuilder();
         OrderLineItem oli;
         for (Integer key : lineItems.keySet()) {
@@ -50,10 +53,37 @@ public class AddItemController {
                     + oli.getQuantity() + "\n\n");
         }
         returnString.append("[Total Price]: " + this.cart.getTotal() + "\n");
-        return returnString;
+
     }
 
-    // public void makeNewOrder() {
-    // shop.getOrderHistory().makeNewOrder(customer);
-    // }
+    // Change the Quantity of The Selected Item and show the change
+    public void changeItemQuantity(int itemID, int quantity) {
+        OrderLineItem oli = cart.setQuantity(itemID, quantity);
+        System.out.println("[itemID]: " + oli.getID() + "\n[Option]: " + oli.getOption() + " \n[Quantity]: "
+                + oli.getQuantity() + "\n\n");
+        System.out.print("[Total Price]: " + this.cart.getTotal() + "\n");
+    }
+
+    // Delete the Selected Item from the Cart and show the Change
+    public void deleteItem(int itemID) {
+        cart.deleteItem(itemID);
+        Map<Integer, OrderLineItem> lineItems = this.cart.getLineItems();
+
+        OrderLineItem oli;
+        for (Integer key : lineItems.keySet()) {
+            oli = lineItems.get(key);
+            System.out.print("[itemID]: " + oli.getID() + "\n[Option]: " + oli.getOption() + " \n[Quantity]: "
+                    + oli.getQuantity() + "\n\n");
+        }
+        System.out.print("[Total Price]: " + this.cart.getTotal() + "\n");
+
+    }
+
+    // get the Selected Item from the Cart LineItem and show
+    public void selectCartItem(int itemID) {
+        OrderLineItem oli = cart.getLineItem(itemID);
+        System.out.println("[itemID]: " + oli.getID() + "\n[Option]: " + oli.getOption() + " \n[Quantity]: "
+                + oli.getQuantity() + "\n\n");
+
+    }
 }
