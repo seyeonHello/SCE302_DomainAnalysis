@@ -32,13 +32,13 @@ public class ManageOrderController {
         OrderLineItem oli = selectedOrder.lineItems.get(itemID);
         switch (statusNum) {
             case 1:
-                oli.setStatus("ì…ê¸ˆí™•ì¸ ì¤‘");
+                oli.setStatus("ÀÔ±İÈ®ÀÎ Áß");
                 break;
             case 2:
-                oli.setStatus("ê²°ì œ ì™„ë£Œ");
+                oli.setStatus("°áÁ¦ ¿Ï·á");
                 break;
             case 3:
-                oli.setStatus("ë°œì†¡ ì™„ë£Œ");
+                oli.setStatus("¹ß¼Û ¿Ï·á");
                 break;
             default:
                 break;

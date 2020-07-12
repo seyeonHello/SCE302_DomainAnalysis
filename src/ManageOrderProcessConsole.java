@@ -25,7 +25,7 @@ public class ManageOrderProcessConsole {
 					+ "\n[Ordered Date]: " + o.getDate() + "\n[Address]: " + o.getAddress() + "\n");
 		}
 		System.out.print("\n\nSee The Order List Of...\n");
-		System.out.print("1. ì „ì²´ ì£¼ë¬¸ ë‚´ì—­ 2. ì…ê¸ˆí™•ì¸ ì¤‘ 3. ê²°ì œ ì™„ë£Œ 4. ë°œì†¡ ì™„ë£Œ 5. ë„˜ì–´ê°€ê¸°\n");
+		System.out.print("1. ÀüÃ¼ ÁÖ¹® ³»¿ª 2. ÀÔ±İÈ®ÀÎ Áß 3. °áÁ¦ ¿Ï·á 4. ¹ß¼Û ¿Ï·á 5. ³Ñ¾î°¡±â\n");
 		int listDecision = input.nextInt();
 		OrderLineItem oli;
 		switch (listDecision) {
@@ -37,13 +37,13 @@ public class ManageOrderProcessConsole {
 				}
 				break;
 			case 2:
-				manageorderController.showSelectedStatus("ì…ê¸ˆí™•ì¸ ì¤‘");
+				manageorderController.showSelectedStatus("ÀÔ±İÈ®ÀÎ Áß");
 				break;
 			case 3:
-				manageorderController.showSelectedStatus("ê²°ì œ ì™„ë£Œ");
+				manageorderController.showSelectedStatus("°áÁ¦ ¿Ï·á");
 				break;
 			case 4:
-				manageorderController.showSelectedStatus("ë°œì†¡ ì™„ë£Œ");
+				manageorderController.showSelectedStatus("¹ß¼Û ¿Ï·á");
 				break;
 			default:
 				break;
@@ -65,7 +65,7 @@ public class ManageOrderProcessConsole {
 		System.out.printf("Select an Item: \n");
 		int itemID = input.nextInt();
 		String status = manageorderController.selectOrderItem(itemID);
-		String[] s = { "ì…ê¸ˆí™•ì¸ ì¤‘", "ê²°ì œ ì™„ë£Œ", "ë°œì†¡ ì™„ë£Œ" };
+		String[] s = { "ÀÔ±İÈ®ÀÎ Áß", "°áÁ¦ ¿Ï·á", "¹ß¼Û ¿Ï·á" };
 		for (int i = 0; i < 3; i++) {
 			System.out.print(i + 1 + ". [" + s[i] + "] : ");
 			if (status == s[i])
